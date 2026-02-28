@@ -19,7 +19,9 @@ Android app for scanning BLE devices, connecting through `BluetoothGatt`, and dr
 
 - Android Studio recent stable release, or command-line Android SDK tooling
 - Android SDK platform 36
-- JDK 11
+- JDK 17 or newer to run the Gradle build
+
+The app code is configured to target Java 11 bytecode, but Android Gradle Plugin `8.12.0` requires a JDK 17+ runtime for the build itself.
 
 `local.properties` is intentionally not committed. Android Studio usually recreates it automatically. If you build from the command line, make sure it points to your local Android SDK path.
 
