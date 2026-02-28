@@ -58,6 +58,14 @@ android {
     buildFeatures {
         compose = true
     }
+    applicationVariants.configureEach {
+        if (buildType.name == "release") {
+            val apkName = "Sofar-MiniBox3-35-${versionName ?: "0.0.0"}.apk"
+            outputs.configureEach {
+                (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName = apkName
+            }
+        }
+    }
 }
 
 dependencies {
