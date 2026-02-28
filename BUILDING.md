@@ -25,7 +25,7 @@ sdk.dir=/path/to/Android/Sdk
 ```
 
 `local.properties` is ignored by Git and should stay local to each machine.
-If you build inside WSL, use a Linux path such as `/mnt/c/Users/<you>/AppData/Local/Android/Sdk`, not a Windows-style `C:\\...` path.
+If you build inside WSL, do not point `sdk.dir` at a Windows SDK mounted under `/mnt/c`. Those packages contain Windows executables such as `aapt.exe`, while Gradle running on Linux expects Linux binaries. Install an Android SDK inside WSL and point `sdk.dir` to that Linux-native location instead.
 
 ## Common commands
 
@@ -65,3 +65,4 @@ On Windows, use `gradlew.bat` instead of `./gradlew`.
 - The repository now includes `gradlew`, `gradlew.bat`, and `gradle/wrapper/gradle-wrapper.jar`, so a separate Gradle installation is not required.
 - Android SDK and Java are separate requirements: `sdk.dir` points to the Android SDK, while `java -version` verifies the JDK used by Gradle.
 - This project was validated to the point of Gradle startup on WSL, and project configuration then failed under Java 11 because AGP 8.12 requires Java 17. Use JDK 17+ for actual builds.
+- After upgrading to Java 17, Gradle configuration succeeded in WSL. The next blocker was Android build-tools: a Windows SDK mounted from `C:` is not usable for Linux-side builds because it ships `.exe` binaries instead of Linux tools.
